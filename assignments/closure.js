@@ -5,6 +5,17 @@
 // The outer scope can be a parent function, or the top level of the script.
 
 
+function addNum(x) {
+  function add(y) {
+    return x + y;
+  };
+  return add;
+}
+
+let addThis = addNum(4);
+console.log(addThis(3));
+
+
 /* STRETCH PROBLEMS, Do not attempt until you have completed all previous tasks for today's project files */
 
 
@@ -16,10 +27,18 @@ const counterMaker = () => {
   //      NOTE: This `counter` function, being nested inside `counterMaker`,
   //      "closes over" the `count` variable. It can "see" it in the parent scope!
   // 3- Return the `counter` function.
+  let count = 0;
+  return function counter() {
+    return count++;
+  }
 };
 // Example usage: const myCounter = counterMaker();
 // myCounter(); // 1
 // myCounter(); // 2
+const myCounter = counterMaker();
+console.log(myCounter());
+console.log(myCounter());
+console.log(myCounter());
 
 // ==== Challenge 3: Make `counterMaker` more sophisticated ====
 // It should have a `limit` parameter. Any counters we make with `counterMaker`
